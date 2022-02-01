@@ -1,0 +1,11 @@
+{
+  "name": "ai",
+  "version": "1.0.0",
+  "description": "A program that generates optimal guesses for Wordle.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tushar Muralidharan",
+  "license": "ISC"
+}
