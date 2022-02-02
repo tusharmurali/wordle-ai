@@ -73,7 +73,7 @@ function getGuess(possibilities) {
 /*
 Tests the AI on all wordles and writes the game tree to the ai.json file.
  */
-function build() {
+function run() {
     let totalGuesses = 0, count = 1
     let distribution = {}, ai = { guess: '', hints: {} }
     for (const wordle of wordles) {
@@ -112,4 +112,4 @@ function build() {
     fs.writeFileSync('ai.json', JSON.stringify(ai))
 }
 
-build()
+run()
