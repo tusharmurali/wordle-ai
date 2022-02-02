@@ -8,7 +8,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         target.setAttribute('data-animation', 'flip-in')
         target.addEventListener('animationend', () => {
             target.style.backgroundColor = colors[index]
-            target.setAttribute('data-animation', 'flip-out')
+            if (target.getAttribute('data-animation') === 'flip-in') {
+                target.setAttribute('data-animation', 'flip-out')
+            }
         })
         hint[(target.id - 1) % 5] = index
     }
@@ -40,10 +42,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                         square.style.cursor = 'auto'
                         square.setAttribute('data-animation', 'flip-in')
                         square.addEventListener('animationend', () => {
-                            if (square.getAttribute('data-animation') === 'flip-in')
+                            if (square.getAttribute('data-animation') === 'flip-in') {
                                 square.setAttribute('data-animation', 'flip-out')
-                            else
+                            } else {
                                 square.removeAttribute('data-animation')
+                            }
                         })
                     }, i * 100)
                     setTimeout(() => {
@@ -82,11 +85,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.querySelectorAll('.button-row button')[1].addEventListener('click', () => {
         if (Object.keys(data.hints).length > 0) {
-            const newData = data.hints[hint.join('')]
+            const hintString = hint.join('')
+            const newData = data.hints[hintString]
             if (newData) {
                 data = newData
                 addGuess(newData.guess, Object.keys(newData.hints).length === 0)
-            } else {
+            } else if (hintString === '22222') {
+                const prev = (guesses.length - 1) * 5 + 1
+                for (let i = 0; i < 5; i++) {
+                    const square = document.getElementById(String(prev + i))
+                    setTimeout(() => square.setAttribute('data-animation', 'bounce'), i * 100)
+                }
+            } else{
                 const prev = (guesses.length - 1) * 5 + 1
                 for (let i = 0; i < 5; i++) {
                     const square = document.getElementById(String(prev + i))
