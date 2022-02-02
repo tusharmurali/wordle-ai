@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const changeColor = ({ target }) => {
         const index = (colors.indexOf(target.style.backgroundColor) + 1) % 3
         target.style.backgroundColor = colors[index]
+        target.setAttribute('data-animation', 'flip-in')
         hint[(target.id - 1) % 5] = index
     }
     const response = await fetch('ai/ai.json')
@@ -28,12 +29,36 @@ document.addEventListener('DOMContentLoaded', async () => {
             hint = [0, 0, 0, 0, 0]
             for (let i = 0; i < guess.length; i++) {
                 const square = document.getElementById(String(start + i))
-                square.innerText = letters[i]
-                square.classList.add('animate__bounceIn')
-                square.style.backgroundColor = final ? '#6aaa64' : '#787c7e'
-                square.style.borderColor = 'transparent'
-                square.style.cursor = 'pointer'
-                square.addEventListener('click', changeColor)
+                if (final) {
+                    setTimeout(() => {
+                        square.innerText = letters[i]
+                        square.style.backgroundColor = '#6aaa64'
+                        square.style.borderColor = 'transparent'
+                        square.style.cursor = 'auto'
+                        square.setAttribute('data-animation', 'bounce')
+                        square.addEventListener('animationend', () => {
+                            if (square.getAttribute('data-animation') === 'flip-in')
+                                square.setAttribute('data-animation', 'flip-out')
+                            else
+                                square.removeAttribute('data-animation')
+                        })
+                    }, i * 100)
+                } else {
+                    setTimeout(() => {
+                        square.addEventListener('click', changeColor)
+                        square.innerText = letters[i]
+                        square.style.backgroundColor = '#787c7e'
+                        square.style.borderColor = 'transparent'
+                        square.style.cursor = 'pointer'
+                        square.setAttribute('data-animation', 'flip-in')
+                        square.addEventListener('animationend', () => {
+                            if (square.getAttribute('data-animation') === 'flip-in')
+                                square.setAttribute('data-animation', 'flip-out')
+                            else
+                                square.removeAttribute('data-animation')
+                        })
+                    }, i * 100)
+                }
             }
         }
     }
@@ -49,20 +74,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     document.querySelector('.button-row button').addEventListener('click', () => {
-        // ONLY DO SOMETHING IF data OBJ HAS CHILDREN HINTS
         if (Object.keys(data.hints).length > 0) {
             const newData = data.hints[hint.join('')]
             if (newData) {
                 data = newData
                 addGuess(newData.guess, Object.keys(newData.hints).length === 0)
             } else {
-                // NO MATCHING HINT
-                // ERROR AND SHAKE
-                alert('Invalid hint!')
+                const prev = (guesses.length - 1) * 5 + 1
+                for (let i = 0; i < 5; i++) {
+                    const square = document.getElementById(String(prev + i))
+                    square.setAttribute('data-animation', 'shake')
+                }
             }
         } else {
-            alert('Game finished!')
+            const prev = (guesses.length - 1) * 5 + 1
+            for (let i = 0; i < 5; i++) {
+                const square = document.getElementById(String(prev + i))
+                setTimeout(() => square.setAttribute('data-animation', 'bounce'), i * 100)
+            }
         }
-        // !!!!!!AUTO DISPLAY GREEN IF THE OBJECT HAS NO HINTS!!!!!!!
     })
 })
