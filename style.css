@@ -64,7 +64,7 @@ header {
 
 .square {
     border: 2px solid #d3d6da;
-    min-width: 60px;
+    width: 60px;
     height: 60px;
     font-size: 2rem;
     font-weight: 700;
@@ -88,11 +88,11 @@ header {
 
 #button-container button {
     font-family: inherit;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 700;
     border: 0;
     padding: 0;
-    height: 50px;
+    height: 58px;
     cursor: pointer;
     background-color: #d3d6da;
     color: #1a1a1b;
@@ -102,6 +102,21 @@ header {
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
+}
+
+/*
+Media tags
+ */
+
+@media (max-width: 500px) {
+    .square {
+        width: calc(12vw);
+        height: calc(12vw);
+    }
+
+    #button-container button {
+        font-size: 12px;
+    }
 }
 
 /*
