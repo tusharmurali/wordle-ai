@@ -52,7 +52,7 @@ function getGuess(possibilities) {
             else hintCounts[hint] = 1
         }
         const uniqueHints = Object.keys(hintCounts).length
-        const sumSq = Object.values(hintCounts).reduce((sum, count) => sum + (count - 1) * (count - 1), 0) - (hintCounts['22222'] || 0) * 4
+        const sumSq = Object.values(hintCounts).reduce((sum, count) => sum + (count - 1) * (count - 1), 0) - (hintCounts['22222'] << 2)
         if (uniqueHints > maxUniqueHints) {
             bestGuess = guess
             maxUniqueHints = uniqueHints
