@@ -137,6 +137,10 @@ Modal
     color: #1a1a1b;
 }
 
+.instructions a {
+    color: #1a1a1b;
+}
+
 .instructions p {
     display: block;
     margin-block-start: 1em;
