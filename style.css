@@ -24,14 +24,23 @@ html, body {
 }
 
 header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid #d3d6da;
+}
+
+.modal-button {
+    border: none;
+    cursor: pointer;
+    padding: 0 4px;
 }
 
 .title {
     color: #1a1a1b;
     font-size: 36px;
     font-weight: 700;
-    letter-spacing: 0.2rem;
+    letter-spacing: 0.125rem;
     margin: 0.4rem 0 0.4rem 0;
     text-align: center;
     font-family: 'Helvetica Neue', sans-serif;
@@ -83,7 +92,7 @@ header {
     font-weight: 700;
     border: 0;
     padding: 0;
-    height: 58px;
+    height: 50px;
     cursor: pointer;
     background-color: #d3d6da;
     color: #1a1a1b;
@@ -93,6 +102,54 @@ header {
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
+}
+
+/*
+Modal
+ */
+
+/* The Modal (background) */
+#modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: #ffffff; /* Fallback color */
+    max-width: 500px;
+    flex-direction: column;
+}
+
+#modal header {
+    border-bottom: none;
+}
+
+/* Modal Content/Box */
+#modal-content {
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    /*width: 80%; !* Could be more or less, depending on screen size *!*/
+}
+
+.instructions {
+    font-size: 16px;
+    color: #1a1a1b;
+}
+
+.instructions p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+}
+
+/* The Close Button */
+.close {
+    cursor: pointer;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }
 
 /*

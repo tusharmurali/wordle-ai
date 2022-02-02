@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    document.querySelector('.button-row button').addEventListener('click', () => {
+    document.querySelectorAll('.button-row button')[1].addEventListener('click', () => {
         if (Object.keys(data.hints).length > 0) {
             const newData = data.hints[hint.join('')]
             if (newData) {
@@ -94,4 +94,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
     })
+
+    const modal = document.getElementById('modal')
+    const modalButton = document.getElementsByClassName('modal-button')[0]
+    modalButton.addEventListener('click', () => {
+        modal.style.display = 'block'
+    })
+
+    const close = document.getElementsByClassName('close')[1]
+    close.addEventListener('click', () => {
+        modal.style.display = 'none'
+    })
+
 })
