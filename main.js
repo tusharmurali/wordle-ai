@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             target.style.backgroundColor = colors[index]
             if (target.getAttribute('data-animation') === 'flip-in') {
                 target.setAttribute('data-animation', 'flip-out')
-            } else {
-                target.removeAttribute('data-animation')
             }
         })
         hint[(target.id - 1) % 5] = index
