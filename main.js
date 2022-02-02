@@ -5,8 +5,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const colors = ['rgb(120, 124, 126)', 'rgb(201, 180, 88)', 'rgb(106, 170, 100)']
     const changeColor = ({ target }) => {
         const index = (colors.indexOf(target.style.backgroundColor) + 1) % 3
-        target.style.backgroundColor = colors[index]
         target.setAttribute('data-animation', 'flip-in')
+        target.addEventListener('animationend', () => {
+            target.style.backgroundColor = colors[index]
+            target.setAttribute('data-animation', 'flip-out')
+        })
         hint[(target.id - 1) % 5] = index
     }
     const response = await fetch('ai/ai.json')
@@ -35,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         square.style.backgroundColor = '#6aaa64'
                         square.style.borderColor = 'transparent'
                         square.style.cursor = 'auto'
-                        square.setAttribute('data-animation', 'bounce')
+                        square.setAttribute('data-animation', 'flip-in')
                         square.addEventListener('animationend', () => {
                             if (square.getAttribute('data-animation') === 'flip-in')
                                 square.setAttribute('data-animation', 'flip-out')
@@ -43,6 +46,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                                 square.removeAttribute('data-animation')
                         })
                     }, i * 100)
+                    setTimeout(() => {
+                        square.setAttribute('data-animation', 'bounce')
+                    }, (i + 10) * 100)
                 } else {
                     setTimeout(() => {
                         square.addEventListener('click', changeColor)
@@ -52,10 +58,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                         square.style.cursor = 'pointer'
                         square.setAttribute('data-animation', 'flip-in')
                         square.addEventListener('animationend', () => {
-                            if (square.getAttribute('data-animation') === 'flip-in')
+                            if (square.getAttribute('data-animation') === 'flip-in') {
                                 square.setAttribute('data-animation', 'flip-out')
-                            else
+                            } else {
                                 square.removeAttribute('data-animation')
+                            }
                         })
                     }, i * 100)
                 }
