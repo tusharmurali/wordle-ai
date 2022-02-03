@@ -178,7 +178,7 @@ Modal
     color: var(--title);
 }
 
-.instructions a {
+a {
     color: var(--title);
 }
 
@@ -219,6 +219,17 @@ Modal
 
 path {
     fill: var(--icon);
+}
+
+#footnote {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    color: var(--description);
+    font-size: 16px;
+    text-align: center;
 }
 
 /*
