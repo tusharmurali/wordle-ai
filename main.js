@@ -171,7 +171,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         root.style.setProperty('--text', '#121213')
         root.style.setProperty('--description', '#818384')
         root.style.setProperty('--icon', '#565758')
-        colors = setNewColors(['rgb(58, 58, 60)', colors[1], colors[2]])
+        if (colors[1] === 'rgb(133, 192, 249)')
+            colors = setNewColors(['rgb(58, 58, 60)', colors[1], colors[2]])
+        else
+            colors = setNewColors(['rgb(58, 58, 60)', 'rgb(181, 159, 59)', 'rgb(83, 141, 78)'])
     }
 
     function disableDarkMode() {
@@ -180,7 +183,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         root.style.setProperty('--text', '#ffffff')
         root.style.setProperty('--description', '#787c7e')
         root.style.setProperty('--icon', '#878a8c')
-        colors = setNewColors(['rgb(120, 124, 126)', colors[1], colors[2]])
+        if (colors[1] === 'rgb(133, 192, 249)')
+            colors = setNewColors(['rgb(120, 124, 126)', colors[1], colors[2]])
+        else
+            colors = setNewColors(['rgb(120, 124, 126)', 'rgb(201, 180, 88)', 'rgb(106, 170, 100)'])
     }
 
     function enableColorBlindMode() {
