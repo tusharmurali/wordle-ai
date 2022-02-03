@@ -108,14 +108,27 @@ header {
 Media tags
  */
 
-@media (max-width: 500px) {
-    .square {
-        width: calc(12vw);
-        height: calc(12vw);
+@media (max-width: 360px) {
+    .title {
+        font-size: 22px;
+        letter-spacing: 0.0625rem;
     }
 
-    #button-container button {
-        font-size: 12px;
+    .square {
+        width: calc(20vw - 12px);
+        height: calc(20vw - 12px);
+        margin-top: calc(36px - 10vw);
+        margin-bottom: calc(36px - 10vw)
+    }
+}
+
+@media (max-width: 520px) {
+    .close {
+        padding: 0 16px;
+    }
+
+    .instructions {
+        padding: 0 16px;
     }
 }
 
@@ -138,6 +151,16 @@ Modal
 
 #modal header {
     border-bottom: none;
+}
+
+#modal-container h1 {
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* Modal Content/Box */
