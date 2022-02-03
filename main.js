@@ -3,6 +3,36 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     let guesses = [], hint = []
     let colors = ['rgb(120, 124, 126)', 'rgb(201, 180, 88)', 'rgb(106, 170, 100)']
+    const root = document.documentElement
+    const darkModeButton = document.getElementById('darkMode')
+    if (localStorage.getItem('darkMode')) {
+        darkModeButton.checked = JSON.parse(localStorage.getItem('darkMode'))
+    } else {
+        darkModeButton.checked = false
+    }
+    if (darkModeButton.checked) {
+        root.style.setProperty('--border', '#3a3a3c')
+        root.style.setProperty('--title', '#d7dadc')
+        root.style.setProperty('--text', '#121213')
+        root.style.setProperty('--description', '#818384')
+        root.style.setProperty('--icon', '#565758')
+    }
+    darkModeButton.addEventListener('click', () => {
+        localStorage.setItem('darkMode', darkModeButton.checked)
+        if (darkModeButton.checked) {
+            root.style.setProperty('--border', '#3a3a3c')
+            root.style.setProperty('--title', '#d7dadc')
+            root.style.setProperty('--text', '#121213')
+            root.style.setProperty('--description', '#818384')
+            root.style.setProperty('--icon', '#565758')
+        } else {
+            root.style.setProperty('--border', '#d3d6da')
+            root.style.setProperty('--title', '#1a1a1b')
+            root.style.setProperty('--text', '#ffffff')
+            root.style.setProperty('--description', '#787c7e')
+            root.style.setProperty('--icon', '#878a8c')
+        }
+    })
     const changeColor = ({ target }) => {
         const index = (colors.indexOf(target.style.backgroundColor) + 1) % 3
         target.setAttribute('data-animation', 'flip-in')
@@ -127,37 +157,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     })
     closeButtons[3].addEventListener('click', () => {
         settingsModal.style.display = 'none'
-    })
-
-    const root = document.documentElement
-    const darkModeButton = document.getElementById('darkMode')
-    if (localStorage.getItem('darkMode')) {
-        darkModeButton.checked = JSON.parse(localStorage.getItem('darkMode'))
-    } else {
-        darkModeButton.checked = false
-    }
-    if (darkModeButton.checked) {
-        root.style.setProperty('--border', '#3a3a3c')
-        root.style.setProperty('--title', '#d7dadc')
-        root.style.setProperty('--text', '#121213')
-        root.style.setProperty('--description', '#818384')
-        root.style.setProperty('--icon', '#565758')
-    }
-    darkModeButton.addEventListener('click', () => {
-        localStorage.setItem('darkMode', darkModeButton.checked)
-        if (darkModeButton.checked) {
-            root.style.setProperty('--border', '#3a3a3c')
-            root.style.setProperty('--title', '#d7dadc')
-            root.style.setProperty('--text', '#121213')
-            root.style.setProperty('--description', '#818384')
-            root.style.setProperty('--icon', '#565758')
-        } else {
-            root.style.setProperty('--border', '#d3d6da')
-            root.style.setProperty('--title', '#1a1a1b')
-            root.style.setProperty('--text', '#ffffff')
-            root.style.setProperty('--description', '#787c7e')
-            root.style.setProperty('--icon', '#878a8c')
-        }
     })
 
     const colorBlindButton = document.getElementById('colorBlindMode')
