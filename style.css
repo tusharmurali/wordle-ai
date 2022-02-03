@@ -1,3 +1,12 @@
+:root {
+    --border: #d3d6da;
+    --title: #1a1a1b;
+    --text: #ffffff;
+    --description: #787c7e;
+    --checked: #538d4e;
+    --icon: #878a8c;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -13,6 +22,7 @@ html, body {
     height: 100%;
     align-items: center;
     flex-direction: column;
+    background-color: var(--text);
 }
 
 #game {
@@ -27,7 +37,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #d3d6da;
+    border-bottom: 1px solid var(--border);
 }
 
 .modal-button {
@@ -37,7 +47,7 @@ header {
 }
 
 .title {
-    color: #1a1a1b;
+    color: var(--title);
     font-size: 36px;
     font-weight: 700;
     letter-spacing: 0.125rem;
@@ -63,7 +73,7 @@ header {
 }
 
 .square {
-    border: 2px solid #d3d6da;
+    border: 2px solid var(--border);
     width: 60px;
     height: 60px;
     font-size: 2rem;
@@ -94,8 +104,8 @@ header {
     padding: 0;
     height: 58px;
     cursor: pointer;
-    background-color: #d3d6da;
-    color: #1a1a1b;
+    background-color: var(--border);
+    color: var(--title);
     flex-grow: 0.1;
     margin-right: 6px;
     border-radius: 4px;
@@ -127,7 +137,7 @@ Media tags
         padding: 0 16px;
     }
 
-    .instructions {
+    .instructions, .settings {
         padding: 0 16px;
     }
 }
@@ -137,23 +147,23 @@ Modal
  */
 
 /* The Modal (background) */
-#modal {
+.modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: #ffffff; /* Fallback color */
+    background-color: var(--text);
     max-width: 500px;
     flex-direction: column;
 }
 
-#modal header {
+.modal header {
     border-bottom: none;
 }
 
-#modal-container h1 {
+.modal-container h1 {
     font-weight: 700;
     font-size: 16px;
     letter-spacing: 0.5px;
@@ -163,20 +173,13 @@ Modal
     margin-bottom: 10px;
 }
 
-/* Modal Content/Box */
-#modal-content {
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    /*width: 80%; !* Could be more or less, depending on screen size *!*/
-}
-
-.instructions {
+.instructions, .settings {
     font-size: 16px;
-    color: #1a1a1b;
+    color: var(--title);
 }
 
 .instructions a {
-    color: #1a1a1b;
+    color: var(--title);
 }
 
 .instructions p {
@@ -185,13 +188,103 @@ Modal
     margin-block-end: 1em;
 }
 
+.setting {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+}
+
+.modal-title {
+    color: var(--title);
+}
+
+.setting-title {
+    font-size: 18px;
+}
+
+.setting-description {
+    font-size: 12px;
+    color: var(--description);
+}
+
 /* The Close Button */
 .close {
     cursor: pointer;
-    color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
+}
+
+path {
+    fill: var(--icon);
+}
+
+/*
+Sliders
+ */
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    height: 20px;
+    width: 32px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #878a8c;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: calc(100% - 4px);
+    width: 50%;
+    left: 2px;
+    top: 2px;
+    background-color: #ffffff;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: var(--checked);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--checked);
+}
+
+input:checked + .slider:before {
+    -ms-transform: translateX(calc(100% - 4px));
+    transform: translateX(calc(100% - 4px));
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
 }
 
 /*
