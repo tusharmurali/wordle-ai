@@ -11,26 +11,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         darkModeButton.checked = false
     }
     if (darkModeButton.checked) {
-        root.style.setProperty('--border', '#3a3a3c')
-        root.style.setProperty('--title', '#d7dadc')
-        root.style.setProperty('--text', '#121213')
-        root.style.setProperty('--description', '#818384')
-        root.style.setProperty('--icon', '#565758')
+        enableDarkMode()
     }
     darkModeButton.addEventListener('click', () => {
         localStorage.setItem('darkMode', darkModeButton.checked)
         if (darkModeButton.checked) {
-            root.style.setProperty('--border', '#3a3a3c')
-            root.style.setProperty('--title', '#d7dadc')
-            root.style.setProperty('--text', '#121213')
-            root.style.setProperty('--description', '#818384')
-            root.style.setProperty('--icon', '#565758')
+            enableDarkMode()
         } else {
-            root.style.setProperty('--border', '#d3d6da')
-            root.style.setProperty('--title', '#1a1a1b')
-            root.style.setProperty('--text', '#ffffff')
-            root.style.setProperty('--description', '#787c7e')
-            root.style.setProperty('--icon', '#878a8c')
+            disableDarkMode()
         }
     })
     const changeColor = ({ target }) => {
@@ -166,6 +154,34 @@ document.addEventListener('DOMContentLoaded', async () => {
         colorBlindButton.checked = false
     }
     if (colorBlindButton.checked) {
+        enableColorBlindMode()
+    }
+    colorBlindButton.addEventListener('click', () => {
+        localStorage.setItem('colorBlindMode', darkModeButton.checked)
+        if (colorBlindButton.checked) {
+            enableColorBlindMode()
+        } else {
+            disableColorBlindMode()
+        }
+    })
+
+    function enableDarkMode() {
+        root.style.setProperty('--border', '#3a3a3c')
+        root.style.setProperty('--title', '#d7dadc')
+        root.style.setProperty('--text', '#121213')
+        root.style.setProperty('--description', '#818384')
+        root.style.setProperty('--icon', '#565758')
+    }
+
+    function disableDarkMode() {
+        root.style.setProperty('--border', '#d3d6da')
+        root.style.setProperty('--title', '#1a1a1b')
+        root.style.setProperty('--text', '#ffffff')
+        root.style.setProperty('--description', '#787c7e')
+        root.style.setProperty('--icon', '#878a8c')
+    }
+
+    function enableColorBlindMode() {
         const newColors = ['rgb(120, 124, 126)', 'rgb(133, 192, 249)', 'rgb(245, 121, 58)']
         for (let i = 0; i < guesses.length * 5; i++) {
             const square = document.getElementById(String(i + 1))
@@ -174,24 +190,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         colors = newColors
         root.style.setProperty('--checked', '#f5793a')
     }
-    colorBlindButton.addEventListener('click', () => {
-        localStorage.setItem('colorBlindMode', darkModeButton.checked)
-        if (colorBlindButton.checked) {
-            const newColors = ['rgb(120, 124, 126)', 'rgb(133, 192, 249)', 'rgb(245, 121, 58)']
-            for (let i = 0; i < guesses.length * 5; i++) {
-                const square = document.getElementById(String(i + 1))
-                square.style.backgroundColor = newColors[colors.indexOf(square.style.backgroundColor)]
-            }
-            colors = newColors
-            root.style.setProperty('--checked', '#f5793a')
-        } else {
-            const newColors = ['rgb(120, 124, 126)', 'rgb(201, 180, 88)', 'rgb(106, 170, 100)']
-            for (let i = 0; i < guesses.length * 5; i++) {
-                const square = document.getElementById(String(i + 1))
-                square.style.backgroundColor = newColors[colors.indexOf(square.style.backgroundColor)]
-            }
-            colors = newColors
-            root.style.setProperty('--checked', '#538d4e')
+
+    function disableColorBlindMode() {
+        const newColors = ['rgb(120, 124, 126)', 'rgb(201, 180, 88)', 'rgb(106, 170, 100)']
+        for (let i = 0; i < guesses.length * 5; i++) {
+            const square = document.getElementById(String(i + 1))
+            square.style.backgroundColor = newColors[colors.indexOf(square.style.backgroundColor)]
         }
-    })
+        colors = newColors
+        root.style.setProperty('--checked', '#538d4e')
+    }
 })
