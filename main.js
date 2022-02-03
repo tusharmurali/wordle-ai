@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             disableDarkMode()
         }
     })
+
     const changeColor = ({ target }) => {
         const index = (colors.indexOf(target.style.backgroundColor) + 1) % 3
         target.setAttribute('data-animation', 'flip-in')
@@ -101,7 +102,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    document.querySelectorAll('.button-row button')[1].addEventListener('click', () => {
+    const nextGuessButton = document.querySelectorAll('.button-row button')[1]
+    nextGuessButton.addEventListener('click', () => {
         if (Object.keys(data.hints).length > 0) {
             const hintString = hint.join('')
             const newData = data.hints[hintString]
@@ -111,23 +113,24 @@ document.addEventListener('DOMContentLoaded', async () => {
             } else if (hintString === '22222') {
                 const prev = (guesses.length - 1) * 5 + 1
                 for (let i = 0; i < 5; i++) {
-                    const square = document.getElementById(String(prev + i))
-                    setTimeout(() => square.setAttribute('data-animation', 'bounce'), i * 100)
+                    setTimeout(() => document.getElementById(String(prev + i)).setAttribute('data-animation', 'bounce'), i * 100)
                 }
             } else{
                 const prev = (guesses.length - 1) * 5 + 1
                 for (let i = 0; i < 5; i++) {
-                    const square = document.getElementById(String(prev + i))
-                    square.setAttribute('data-animation', 'shake')
+                    document.getElementById(String(prev + i)).setAttribute('data-animation', 'shake')
                 }
             }
         } else {
             const prev = (guesses.length - 1) * 5 + 1
             for (let i = 0; i < 5; i++) {
-                const square = document.getElementById(String(prev + i))
-                setTimeout(() => square.setAttribute('data-animation', 'bounce'), i * 100)
+                setTimeout(() => document.getElementById(String(prev + i)).setAttribute('data-animation', 'bounce'), i * 100)
             }
         }
+    })
+    document.addEventListener('keydown', event => {
+        if (event.key === "Enter")
+            nextGuessButton.click()
     })
 
     const [instructionsModal, settingsModal] = document.getElementsByClassName('modal')
