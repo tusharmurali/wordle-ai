@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         enableColorBlindMode()
     }
     colorBlindButton.addEventListener('click', () => {
-        localStorage.setItem('colorBlindMode', darkModeButton.checked)
+        localStorage.setItem('colorBlindMode', colorBlindButton.checked)
         if (colorBlindButton.checked) {
             enableColorBlindMode()
         } else {
